@@ -35,6 +35,6 @@ public class CadeteriaController : ControllerBase
     [Route("Informe")]
     public ActionResult<string> GetInforme()
     {
-        return Ok(cadeteria.i)
+        return Ok();
     }
 }
