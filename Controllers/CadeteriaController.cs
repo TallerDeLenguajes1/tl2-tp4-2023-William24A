@@ -37,4 +37,25 @@ public class CadeteriaController : ControllerBase
     {
         return Ok();
     }
+    [HttpPost("Agregar")]
+    public ActionResult AddPedido(int numeroPedido, string? observacion,string nombreCliente, string direccion, int telefono, string datosreferencia)
+    {
+        return Ok(cadeteria.CrearPedidoAgregar(numeroPedido, observacion) && cadeteria.AsignarClienteAPedido(numeroPedido, nombreCliente, direccion, telefono, datosreferencia));
+    }
+
+    [HttpPut("Asignar")]
+    public ActionResult AsignarPedido(int idpedido, int idcadete )
+    {
+        return Ok(cadeteria.AsignarCadeteAPedido(idcadete, idpedido));
+    }
+    [HttpPut("Cambio de Estado")]
+    public ActionResult CambioEstado(int idpedido)
+    {
+        return Ok(cadeteria.CambiarEstado(idpedido));
+    }
+    [HttpPut("Asignar nuevo cadete")]
+    public ActionResult AsignarNuevo(int idpedido, int idcadete)
+    {
+        return Ok(cadeteria.AsignarCadeteAPedido(idcadete, idpedido));
+    }
 }
