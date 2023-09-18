@@ -33,9 +33,9 @@ public class CadeteriaController : ControllerBase
     }
     [HttpGet]
     [Route("Informe")]
-    public ActionResult<string> GetInforme()
+    public ActionResult<Informe> GetInforme()
     {
-        return Ok();
+        return Ok(cadeteria.Informe);
     }
     [HttpPost("Agregar pedido")]
     public ActionResult AddPedido(int numeroPedido, string? observacion,string nombreCliente, string direccion, int telefono, string datosreferencia)
