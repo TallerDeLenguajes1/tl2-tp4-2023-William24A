@@ -1,6 +1,5 @@
 namespace WebAPI;
 using CadeteUtilizar;
-using PedidoUtilizar;
 //using WebAPI;
 
 public class Cadeteria 

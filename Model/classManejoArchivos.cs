@@ -1,10 +1,9 @@
-using WebAPI;
+
 using CadeteUtilizar;
-using PedidoUtilizar;
 using System.Text;
 using System.Text.Json;
 
-namespace ArchivosUtilizar;
+namespace WebAPI;
 public abstract class AccesoADatos
 {
     public virtual Cadeteria LeerDatosCadeteria(string ruta)

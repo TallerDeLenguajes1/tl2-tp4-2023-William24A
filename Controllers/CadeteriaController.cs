@@ -1,6 +1,5 @@
 using CadeteUtilizar;
 using Microsoft.AspNetCore.Mvc;
-using PedidoUtilizar;
 using WebAPI;
 
 namespace tl2_tp4_2023_William24A.Controllers;
@@ -22,21 +21,35 @@ public class CadeteriaController : ControllerBase
     [Route("Pedido")]
     public ActionResult<List<Pedido>> GetPedidos()
     {
-        return Ok(cadeteria.GetPedidos());
+        if(cadeteria.ExistePedido())
+        {
+            return Ok(cadeteria.GetCadetes());
+        }
+        return NotFound(false);
     }
+        
 
     [HttpGet]
     [Route("Cadete")]
     public ActionResult<List<Cadete>> GetCadetes()
     {
-        return Ok(cadeteria.GetCadetes());
+        if(cadeteria.ExisteCadete())
+        {
+            return Ok(cadeteria.GetCadetes());
+        }
+        return NotFound(false);
     }
     [HttpGet]
     [Route("Informe")]
     public ActionResult<Informe> GetInforme()
     {
-        return Ok(cadeteria.Informe);
+        if(cadeteria.ExistePedido())
+        {
+            return Ok(cadeteria.Informe);
+        }
+        return NotFound(false);
     }
+    
     [HttpPost("Agregar pedido")]
     public ActionResult AddPedido(int numeroPedido, string? observacion,string nombreCliente, string direccion, int telefono, string datosreferencia)
     {

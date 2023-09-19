@@ -1,4 +1,4 @@
-namespace PedidoUtilizar;
+namespace WebAPI;
 
 using CadeteUtilizar;
 using ClienteUtilizar;

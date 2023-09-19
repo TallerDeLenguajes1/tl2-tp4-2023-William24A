@@ -1,5 +1,5 @@
 namespace WebAPI;
-using PedidoUtilizar;
+
 public class Informe
 {
     private List<Pedido> pedidosEntregados;
