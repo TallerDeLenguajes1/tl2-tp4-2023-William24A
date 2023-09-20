@@ -23,7 +23,7 @@ public class CadeteriaController : ControllerBase
     {
         if(cadeteria.ExistePedido())
         {
-            return Ok(cadeteria.GetCadetes());
+            return Ok(cadeteria.GetPedidos());
         }
         return NotFound(false);
     }
