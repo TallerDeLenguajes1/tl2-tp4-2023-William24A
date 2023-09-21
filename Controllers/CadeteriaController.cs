@@ -51,24 +51,56 @@ public class CadeteriaController : ControllerBase
     }
     
     [HttpPost("Agregar pedido")]
-    public ActionResult AddPedido(int numeroPedido, string? observacion,string nombreCliente, string direccion, int telefono, string datosreferencia)
+    public ActionResult<List<Pedido>> AddPedido(int numeroPedido, string? observacion,string nombreCliente, string direccion, int telefono, string datosreferencia)
     {
-        return Ok(!cadeteria.ExisteNumeroPedido(numeroPedido) && cadeteria.CrearPedidoAgregar(numeroPedido, observacion) && cadeteria.AsignarClienteAPedido(numeroPedido, nombreCliente, direccion, telefono, datosreferencia));
+        if(!cadeteria.ExisteNumeroPedido(numeroPedido))
+        {
+            cadeteria.CrearPedidoAgregar(numeroPedido, observacion);  
+            cadeteria.AsignarClienteAPedido(numeroPedido, nombreCliente, direccion, telefono, datosreferencia);
+        }
+        return Created("", cadeteria.GetPedidos());
+        //return Ok(!cadeteria.ExisteNumeroPedido(numeroPedido) && cadeteria.CrearPedidoAgregar(numeroPedido, observacion) && cadeteria.AsignarClienteAPedido(numeroPedido, nombreCliente, direccion, telefono, datosreferencia));
     }
 
     [HttpPut("Asignar")]
-    public ActionResult AsignarPedido(int idpedido, int idcadete )
+    public ActionResult<Pedido> AsignarPedido(int idpedido, int idcadete )
     {
-        return Ok(cadeteria.AsignarCadeteAPedido(idcadete, idpedido));
+        if(cadeteria.ExisteNumeroPedido(idpedido) && cadeteria.ExisteIDCadete(idcadete))
+        {
+            if(cadeteria.EncontrarCadeteLibere(idcadete) != 0)
+            {
+                return Ok(cadeteria.AsignarCadeteAPedido(idcadete, idpedido));
+            }
+            else
+            {
+                return NotFound("No esta libre el cadete");
+            }
+        }
+        return NotFound(false);
     }
     [HttpPut("Cambio de Estado")]
     public ActionResult CambioEstado(int idpedido)
     {
-        return Ok(cadeteria.ExisteNumeroPedido(idpedido) && cadeteria.CambiarEstado(idpedido));
+        if(cadeteria.ExisteNumeroPedido(idpedido))
+        {
+            return Ok(cadeteria.CambiarEstado(idpedido));    
+        }
+        return  NotFound("no existe el id pedido.");
     }
     [HttpPut("Asignar nuevo cadete")]
-    public ActionResult AsignarNuevo(int idpedido, int idcadete)
+    public ActionResult<Pedido> AsignarNuevo(int idpedido, int idcadete)
     {
-        return Ok(cadeteria.ExisteNumeroPedido(idpedido) && cadeteria.ExisteIDCadete(idcadete) && cadeteria.AsignarCadeteAPedido(idcadete, idpedido));
+        if(cadeteria.ExisteNumeroPedido(idpedido) && cadeteria.ExisteIDCadete(idcadete))
+        {
+            if(cadeteria.EncontrarCadeteLibere(idcadete) != 0)
+            {
+                return Ok(cadeteria.AsignarCadeteAPedido(idcadete, idpedido));
+            }
+            else
+            {
+                return NotFound("No esta libre el cadete");
+            }
+        }
+        return NotFound(false);
     }
 }

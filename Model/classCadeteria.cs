@@ -10,7 +10,9 @@ public class Cadeteria
     {
         if(cadeteriaSingleton == null)
         {
+            var archivo = new AccesoCSV();
             cadeteriaSingleton = new Cadeteria();
+            cadeteriaSingleton.AsignarListaEmpleados(archivo.LeerDatosCadetes("CadetesCSV.csv"));
         }
         return cadeteriaSingleton;
     }
@@ -21,8 +23,7 @@ public class Cadeteria
 
     public Cadeteria()
     {
-        var archivo = new AccesoCSV();
-        listaempleados = archivo.LeerDatosCadetes("..\\CadetesCSV.csv");
+        listaempleados = new List<Cadete>();
         listapedidos = new List<Pedido>();
     }
     public Cadeteria(string nombre, int telefono)
@@ -77,6 +78,7 @@ public class Cadeteria
                             if(cadete.Id == pedido.Cadete.Id)
                             {
                                 cadete.Informe.AgregarPedido(pedido);
+                                return true;
                             }
                         }
                     }
@@ -97,7 +99,7 @@ public class Cadeteria
         }
         return cont;
     }
-    public bool AsignarCadeteAPedido(int idcadete, int idpedido)
+    public Pedido AsignarCadeteAPedido(int idcadete, int idpedido)
     {
         foreach (var pedido in Listapedios)
         {
@@ -109,12 +111,12 @@ public class Cadeteria
                     {
                         pedido.CambiarDatosCadete(cadete.Id, cadete.Nombre, cadete.Direccion, cadete.Telefono);
                         cadete.CambiarEstado();
-                        return true;
+                        return pedido;;
                     }
                 }
             }
         }
-        return false;
+        return null;
     }
     public bool AsignarClienteAPedido(int idpedido,string nombreCliente, string direccion, int telefono, string datosreferencia)
     {
@@ -128,13 +130,16 @@ public class Cadeteria
         }
         return false;
     }
-    public int EncontrarCadeteLibere()
+    public int EncontrarCadeteLibere(int idcadete)
     {
         foreach (var cadete in Listaempleados)
         {
-            if(cadete.EstadoCadete == EstadoCadete.Libre)
+            if(cadete.Id == idcadete)
             {
-                return cadete.Id;
+                if(cadete.EstadoCadete == EstadoCadete.Libre)
+                {
+                    return cadete.Id;
+                }
             }
         }
         return 0;
@@ -239,6 +244,10 @@ public class Cadeteria
                 listaInforme.Add(cadete.Informe);
             }
         return listaInforme;
+    }
+    public void AsignarListaEmpleados(List<Cadete> listacadetesNueva)
+    {
+        listaempleados = listacadetesNueva;
     }
 }
 
