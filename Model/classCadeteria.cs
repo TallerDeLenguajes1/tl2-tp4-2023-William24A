@@ -18,13 +18,12 @@ public class Cadeteria
     private int telefono;
     private List<Cadete> listaempleados;
     private List<Pedido> listapedidos;
-    private Informe informe;
 
     public Cadeteria()
     {
-        listaempleados = new List<Cadete>();
+        var archivo = new AccesoCSV();
+        listaempleados = archivo.LeerDatosCadetes("..\\CadetesCSV.csv");
         listapedidos = new List<Pedido>();
-        informe = new Informe();
     }
     public Cadeteria(string nombre, int telefono)
     {
@@ -32,14 +31,12 @@ public class Cadeteria
         this.telefono= telefono;
         listaempleados = new List<Cadete>();
         listapedidos = new List<Pedido>();
-        informe = new Informe();
     }
 
     public string Nombre { get => nombre; }
     public int Telefono { get => telefono; }
     internal List<Cadete> Listaempleados { get => listaempleados; }
     internal List<Pedido> Listapedios {get => listapedidos;}
-    public Informe Informe {get => informe;}
     public bool CrearCadeteAgregar(int id, string nombre, string direccion, int telefono)
     {
         Cadete cadete = new Cadete(id,nombre,direccion,telefono);
@@ -71,7 +68,19 @@ public class Cadeteria
         {
             if(pedido.NumeroPedido == codigoPedido)
             {
-                return pedido.CambiarEstado();
+                if(pedido.CambiarEstado())
+                {
+                    if(pedido.Estado == Estado.Entregado)
+                    {
+                        foreach (var cadete in listaempleados)
+                        {
+                            if(cadete.Id == pedido.Cadete.Id)
+                            {
+                                cadete.Informe.AgregarPedido(pedido);
+                            }
+                        }
+                    }
+                }
             }
         }
         return false;
@@ -143,17 +152,6 @@ public class Cadeteria
         }
         return listaNueva;
     }
-    public Informe CargarObjetoInforme()
-    {
-        foreach (var pedido in listapedidos)
-        {
-            if(pedido.Estado == Estado.Entregado)
-            {
-                informe.AgregarPedido(pedido);
-            }
-        }
-        return informe;
-    }
     public bool ExisteCadete()
     {
         if(listaempleados.Count > 0)
@@ -189,7 +187,7 @@ public class Cadeteria
         {
             if(pedido.NumeroPedido == idpedido)
             {
-                retornar = pedido.Informe();
+                retornar = pedido.InformePedido();
                 retornar +="\n";
                 return retornar;
             }
@@ -204,7 +202,7 @@ public class Cadeteria
         {
             if(cadete.Id == idcadete)
             {
-                retornar = cadete.Informe();
+                retornar = cadete.InformeCadete();
                 retornar +="\n";
             }
             
@@ -232,6 +230,15 @@ public class Cadeteria
             }
         }
         return false;
+    }
+    public List<Informe> ReturnInforme()
+    {
+        List<Informe> listaInforme = new List<Informe>();
+            foreach (var cadete in listaempleados)
+            {
+                listaInforme.Add(cadete.Informe);
+            }
+        return listaInforme;
     }
 }
 

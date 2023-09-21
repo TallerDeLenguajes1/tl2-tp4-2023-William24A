@@ -49,6 +49,7 @@ public class Pedido
             case Estado.Encamino:
                 estado = Estado.Entregado;
                 cadete.CambiarEstado();
+                //cadete.Informe.AgregarPedido();
                 break;
             default:
                 return false;
@@ -73,9 +74,9 @@ public class Pedido
         this.cliente.CambiarDatos(nombreCliente, direccion,telefono,datosreferencia);
     }
 
-    public string Informe()
+    public string InformePedido()
     {
-        return $"Numero de pedido: {numeroPedido}\nObservacion: {observacion}\n"+cliente.Informe()+cadete.Informe();
+        return $"Numero de pedido: {numeroPedido}\nObservacion: {observacion}\n"+cliente.Informe()+cadete.InformeCadete();
     }
 
 }

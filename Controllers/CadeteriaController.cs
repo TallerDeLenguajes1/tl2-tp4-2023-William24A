@@ -45,7 +45,7 @@ public class CadeteriaController : ControllerBase
     {
         if(cadeteria.ExistePedido())
         {
-            return Ok(cadeteria.Informe);
+            return Ok(cadeteria.ReturnInforme());
         }
         return NotFound(false);
     }

@@ -10,7 +10,7 @@ public abstract class AccesoADatos
     {
         return null;
     }
-    public virtual Cadeteria LeerDatosCadetes(Cadeteria cadeteria, string ruta)
+    public virtual List<Cadete> LeerDatosCadetes(string ruta)
     {
         return null;
     }
@@ -56,8 +56,9 @@ class AccesoCSV: AccesoADatos
         }
 
     }
-    public override Cadeteria LeerDatosCadetes(Cadeteria cadeteria, string ruta)
+    public override List<Cadete> LeerDatosCadetes(string ruta)
     {
+        List<Cadete> listacadete = new List<Cadete>();
         try
         {   
             using(StreamReader reader = new StreamReader(ruta))
@@ -66,14 +67,15 @@ class AccesoCSV: AccesoADatos
                 {
                     string line = reader.ReadLine();
                     string[] dato = line.Split(',');
-                    cadeteria.CrearCadeteAgregar(int.Parse(dato[0]),dato[1],dato[2],int.Parse(dato[3]));
+                    Cadete cadete = new Cadete(int.Parse(dato[0]),dato[1],dato[2],int.Parse(dato[3]));
+                    listacadete.Add(cadete);
                 }
             }  
-            return cadeteria;          
+            return listacadete;          
         }
         catch (Exception ex)
         {
-            return cadeteria;
+            return listacadete;
         }
 
     }
@@ -193,15 +195,16 @@ class AccesoJSON: AccesoADatos
 
         return cadeteria;
     }
-    public override Cadeteria LeerDatosCadetes(Cadeteria cadeteria, string ruta)
+    public override List<Cadete> LeerDatosCadetes(string ruta)
     {
+        List<Cadete> listacadete = new List<Cadete>();
         string pathJSON = Directory.GetCurrentDirectory()+"\\"+ruta;
         string Json = File.ReadAllText(pathJSON); //Leer archivo y guardar
         foreach(var cadete in JsonSerializer.Deserialize<List<Cadete>>(Json)) // aclaracion de lista
         {
-            cadeteria.CrearCadeteAgregar(cadete.Id,cadete.Nombre, cadete.Direccion, cadete.Telefono);
+            listacadete.Add(cadete);
         } 
-        return cadeteria;
+        return listacadete;
     }
     public override void CargarDatosCadeterias(Cadeteria cadeteria, string ruta)
     {
