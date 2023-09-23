@@ -10,7 +10,7 @@ public class Cadeteria
         if(cadeteriaSingleton == null)
         {
             cadeteriaSingleton = new Cadeteria();
-            cadeteriaSingleton.CargarDatos("json");
+            cadeteriaSingleton.CargarDatos("csv");
         }
         return cadeteriaSingleton;
     }
@@ -18,11 +18,13 @@ public class Cadeteria
     private int telefono;
     private List<Cadete> listaempleados;
     private List<Pedido> listapedidos;
+    private AccesoADatosPedido archivoPedido;
 
     public Cadeteria()
     {
         listaempleados = new List<Cadete>();
         listapedidos = new List<Pedido>();
+        archivoPedido = new AccesoPedidoJSON();
     }
     public Cadeteria(string nombre, int telefono)
     {
@@ -30,12 +32,14 @@ public class Cadeteria
         this.telefono= telefono;
         listaempleados = new List<Cadete>();
         listapedidos = new List<Pedido>();
+        archivoPedido = new AccesoPedidoJSON();
     }
 
     public string Nombre { get => nombre; }
     public int Telefono { get => telefono; }
     internal List<Cadete> Listaempleados { get => listaempleados; }
     internal List<Pedido> Listapedios {get => listapedidos;}
+    public AccesoADatosPedido ArchivoPedido {get => archivoPedido;}
     private bool CargarDatos(string nombreclase)
     {
         if(nombreclase == "csv")

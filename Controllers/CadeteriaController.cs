@@ -58,18 +58,21 @@ public class CadeteriaController : ControllerBase
             cadeteria.CrearPedidoAgregar(numeroPedido, observacion);  
             cadeteria.AsignarClienteAPedido(numeroPedido, nombreCliente, direccion, telefono, datosreferencia);
         }
+        cadeteria.ArchivoPedido.CargarDatosPedido(cadeteria.GetPedidos(),"PedidoJSON.json");
         return Created("", cadeteria.GetPedidos());
         //return Ok(!cadeteria.ExisteNumeroPedido(numeroPedido) && cadeteria.CrearPedidoAgregar(numeroPedido, observacion) && cadeteria.AsignarClienteAPedido(numeroPedido, nombreCliente, direccion, telefono, datosreferencia));
     }
 
     [HttpPut("Asignar")]
-    public ActionResult<Pedido> AsignarPedido(int idpedido, int idcadete )
+    public ActionResult<string> AsignarPedido(int idpedido, int idcadete )
     {
         if(cadeteria.ExisteNumeroPedido(idpedido) && cadeteria.ExisteIDCadete(idcadete))
         {
             if(cadeteria.EncontrarCadeteLibere(idcadete) != 0)
             {
-                return Ok(cadeteria.AsignarCadeteAPedido(idcadete, idpedido));
+                cadeteria.AsignarCadeteAPedido(idcadete, idpedido);
+                cadeteria.ArchivoPedido.CargarDatosPedido(cadeteria.GetPedidos(),"PedidoJSON.json");
+                return Ok("Pedido asignado");
             }
             else
             {
@@ -83,24 +86,28 @@ public class CadeteriaController : ControllerBase
     {
         if(cadeteria.ExisteNumeroPedido(idpedido))
         {
-            return Ok(cadeteria.CambiarEstado(idpedido));    
+            cadeteria.CambiarEstado(idpedido);
+            cadeteria.ArchivoPedido.CargarDatosPedido(cadeteria.GetPedidos(),"PedidoJSON.json");
+            return Ok("Estado modificado");    
         }
         return  NotFound("no existe el id pedido.");
     }
     [HttpPut("Asignar nuevo cadete")]
-    public ActionResult<Pedido> AsignarNuevo(int idpedido, int idcadete)
+    public ActionResult<string> AsignarNuevo(int idpedido, int idcadete)
     {
         if(cadeteria.ExisteNumeroPedido(idpedido) && cadeteria.ExisteIDCadete(idcadete))
         {
             if(cadeteria.EncontrarCadeteLibere(idcadete) != 0)
             {
-                return Ok(cadeteria.AsignarCadeteAPedido(idcadete, idpedido));
+                cadeteria.AsignarCadeteAPedido(idcadete, idpedido);
+                cadeteria.ArchivoPedido.CargarDatosPedido(cadeteria.GetPedidos(),"PedidoJSON.json");
+                return Ok("Pedido asignado");
             }
             else
             {
                 return NotFound("No esta libre el cadete");
             }
         }
-        return NotFound(false);
+        return NotFound("Pedido no existe");
     }
 }

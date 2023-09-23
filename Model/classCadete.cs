@@ -1,3 +1,4 @@
+//Consultar como hacer una dezerializacion sin necesidad de usar set
 namespace WebAPI;
 public enum EstadoCadete
 {

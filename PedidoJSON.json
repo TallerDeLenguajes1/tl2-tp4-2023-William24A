@@ -1,25 +1,48 @@
 [
     {
-      "numeroPedido": 1,
-      "observacion": "peido nuevo",
-      "cliente": {
-        "nombreCliente": "Alejandro",
-        "direccion": "Av los patos",
-        "telefono": 152932923,
-        "datosreferencia": "casa blanca"
-      },
-      "estado": 0,
-      "cadete": {
-        "id": 0,
-        "nombre": null,
-        "direccion": null,
-        "telefono": 0,
-        "estadoCadete": 1,
-        "informe": {
-          "pedidosEntregados": [],
-          "ganancia": 0,
-          "cantidadEntregados": 0
+        "NumeroPedido": 1,
+        "Observacion": "peido nuevo",
+        "Cliente": {
+            "NombreCliente": "Alejandro",
+            "Direccion": "Av los patos",
+            "Telefono": 152932923,
+            "Datosreferencia": "casa blanca"
+        },
+        "Estado": 1,
+        "Cadete": {
+            "Id": 1,
+            "Nombre": "William",
+            "Direccion": "Av. las flores",
+            "Telefono": 153812323,
+            "EstadoCadete": 1,
+            "Informe": {
+                "PedidosEntregados": [],
+                "Ganancia": 0,
+                "CantidadEntregados": 0
+            }
         }
-      }
+    },
+    {
+        "NumeroPedido": 2,
+        "Observacion": "ssadsad",
+        "Cliente": {
+            "NombreCliente": "asdas",
+            "Direccion": "asdasd",
+            "Telefono": 123213,
+            "Datosreferencia": "asdasd"
+        },
+        "Estado": 0,
+        "Cadete": {
+            "Id": 0,
+            "Nombre": null,
+            "Direccion": null,
+            "Telefono": 0,
+            "EstadoCadete": 1,
+            "Informe": {
+                "PedidosEntregados": [],
+                "Ganancia": 0,
+                "CantidadEntregados": 0
+            }
+        }
     }
-  ]
+]
