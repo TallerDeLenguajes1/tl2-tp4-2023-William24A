@@ -1,6 +1,5 @@
 namespace WebAPI;
 
-using CadeteUtilizar;
 using ClienteUtilizar;
 public enum Estado
 {

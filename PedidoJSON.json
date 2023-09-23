@@ -1,0 +1,25 @@
+[
+    {
+      "numeroPedido": 1,
+      "observacion": "peido nuevo",
+      "cliente": {
+        "nombreCliente": "Alejandro",
+        "direccion": "Av los patos",
+        "telefono": 152932923,
+        "datosreferencia": "casa blanca"
+      },
+      "estado": 0,
+      "cadete": {
+        "id": 0,
+        "nombre": null,
+        "direccion": null,
+        "telefono": 0,
+        "estadoCadete": 1,
+        "informe": {
+          "pedidosEntregados": [],
+          "ganancia": 0,
+          "cantidadEntregados": 0
+        }
+      }
+    }
+  ]

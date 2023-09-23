@@ -1,5 +1,4 @@
 namespace WebAPI;
-using CadeteUtilizar;
 //using WebAPI;
 
 public class Cadeteria 
@@ -10,9 +9,8 @@ public class Cadeteria
     {
         if(cadeteriaSingleton == null)
         {
-            var archivo = new AccesoCSV();
             cadeteriaSingleton = new Cadeteria();
-            cadeteriaSingleton.AsignarListaEmpleados(archivo.LeerDatosCadetes("CadetesCSV.csv"));
+            cadeteriaSingleton.CargarDatos("json");
         }
         return cadeteriaSingleton;
     }
@@ -38,6 +36,29 @@ public class Cadeteria
     public int Telefono { get => telefono; }
     internal List<Cadete> Listaempleados { get => listaempleados; }
     internal List<Pedido> Listapedios {get => listapedidos;}
+    private bool CargarDatos(string nombreclase)
+    {
+        if(nombreclase == "csv")
+        {
+            var archivo = new AccesoCadeteriaCSV();
+            var archivoCSV = new AccesoCadeteCSV();
+            var archivoPedido = new AccesoPedidoCSV();
+            archivo.LeerDatosCadeteria("CadeteriaCSV.csv");
+            cadeteriaSingleton.AsignarListaEmpleados(archivoCSV.LeerDatosCadetes("CadetesCSV.csv"));
+            cadeteriaSingleton.AsignarListaPedido(archivoPedido.LeerDatosPedido("PedidoCSV.csv"));
+            return true;
+        }else if(nombreclase == "json")
+        {
+            var archivo = new AccesoCadeteriaJSON();
+            var archivoJSON = new AccesoCadeteJSON();
+            var archivoPedido = new AccesoPedidoJSON();
+            archivo.LeerDatosCadeteria("CadeteriaJSON.json");
+            cadeteriaSingleton.AsignarListaEmpleados(archivoJSON.LeerDatosCadetes("CadetesJSON.json"));
+            cadeteriaSingleton.AsignarListaPedido(archivoPedido.LeerDatosPedido("PedidoJSON.json"));
+            return true;
+        }
+        return false;
+    }
     public bool CrearCadeteAgregar(int id, string nombre, string direccion, int telefono)
     {
         Cadete cadete = new Cadete(id,nombre,direccion,telefono);
@@ -249,5 +270,8 @@ public class Cadeteria
     {
         listaempleados = listacadetesNueva;
     }
+    public void AsignarListaPedido(List<Pedido> listaPedido)
+    {
+        listapedidos = listaPedido;
+    }
 }
-

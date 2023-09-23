@@ -1,5 +1,4 @@
-namespace CadeteUtilizar;
-using WebAPI;
+namespace WebAPI;
 public enum EstadoCadete
 {
     EntregandoEncangue,

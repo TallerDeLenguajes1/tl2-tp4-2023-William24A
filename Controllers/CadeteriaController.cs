@@ -1,4 +1,4 @@
-using CadeteUtilizar;
+
 using Microsoft.AspNetCore.Mvc;
 using WebAPI;
 
@@ -8,10 +8,10 @@ namespace tl2_tp4_2023_William24A.Controllers;
 [Route("[controller]")]
 public class CadeteriaController : ControllerBase
 {
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<CadeteriaController> _logger;
     private Cadeteria cadeteria;
 
-    public CadeteriaController(ILogger<WeatherForecastController> logger)
+    public CadeteriaController(ILogger<CadeteriaController> logger)
     {
         _logger = logger;
         cadeteria = Cadeteria.GetCadeteria();

@@ -31,3 +31,6 @@ C:\Users\wil37\OneDrive\Documentos\A_Segundo_Año\2-Taller de Lenguaje 2\tl2-tp4
 C:\Users\wil37\OneDrive\Documentos\A_Segundo_Año\2-Taller de Lenguaje 2\tl2-tp4-2023-William24A\obj\Debug\net7.0\tl2-tp4-2023-William24A.pdb
 C:\Users\wil37\OneDrive\Documentos\A_Segundo_Año\2-Taller de Lenguaje 2\tl2-tp4-2023-William24A\obj\Debug\net7.0\tl2-tp4-2023-William24A.genruntimeconfig.cache
 C:\Users\wil37\OneDrive\Documentos\A_Segundo_Año\2-Taller de Lenguaje 2\tl2-tp4-2023-William24A\obj\Debug\net7.0\ref\tl2-tp4-2023-William24A.dll
+C:\Users\wil37\OneDrive\Documentos\A_Segundo_Año\2-Taller de Lenguaje 2\tl2-tp4-2023-William24A\bin\Debug\net7.0\CadeteriaJSON.json
+C:\Users\wil37\OneDrive\Documentos\A_Segundo_Año\2-Taller de Lenguaje 2\tl2-tp4-2023-William24A\bin\Debug\net7.0\CadetesJSON.json
+C:\Users\wil37\OneDrive\Documentos\A_Segundo_Año\2-Taller de Lenguaje 2\tl2-tp4-2023-William24A\bin\Debug\net7.0\PedidoJSON.json
