@@ -61,11 +61,9 @@ public class AccesoCadeteJSON: AccesoADatosCadete
 {
     public override List<Cadete> LeerDatosCadetes(string ruta)
     {
-        List<Cadete> listacadetes = new List<Cadete>();
         string pathJSON = Directory.GetCurrentDirectory()+"\\"+ruta;
         string Json = File.ReadAllText(pathJSON); //Leer archivo y guardar
-        listacadetes = JsonSerializer.Deserialize<List<Cadete>>(Json); // aclaracion de lista
-        return listacadetes;
+        return JsonSerializer.Deserialize<List<Cadete>>(Json); // aclaracion de lista
     }
     public override void CargarDatosCadetes(Cadeteria cadeteria, string ruta)
     {

@@ -1,26 +1,26 @@
 [
-    {
-      "id": 1,
-      "nombre": "William",
-      "direccion": "Av. las flores",
-      "telefono": 153812323,
-      "estadoCadete": 1,
-      "informe": {
-        "pedidosEntregados": [],
-        "ganancia": 0,
-        "cantidadEntregados": 0
-      }
-    },
-    {
-      "id": 2,
-      "nombre": "Walter",
-      "direccion": "Av los soles",
-      "telefono": 153678990,
-      "estadoCadete": 1,
-      "informe": {
-        "pedidosEntregados": [],
-        "ganancia": 0,
-        "cantidadEntregados": 0
-      }
+  {
+    "id": 1,
+    "nombre": "william",
+    "direccion": "AV. las flores",
+    "telefono": 12323,
+    "estadoCadete": 1,
+    "informe": {
+      "pedidosEntregados": [],
+      "ganancia": 0,
+      "cantidadEntregados": 0
     }
-  ]
+  },
+  {
+    "id": 0,
+    "nombre": null,
+    "direccion": null,
+    "telefono": 0,
+    "estadoCadete": 1,
+    "informe": {
+      "pedidosEntregados": [],
+      "ganancia": 0,
+      "cantidadEntregados": 0
+    }
+  }
+]

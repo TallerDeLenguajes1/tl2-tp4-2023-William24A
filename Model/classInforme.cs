@@ -8,20 +8,20 @@ public class Informe
 
     public Informe()
     {
-        pedidosEntregados = new List<Pedido>();
-        this.ganancia = 0;
-        this.cantidadEntregados = 0;
+        PedidosEntregados = new List<Pedido>();
+        this.Ganancia = 0;
+        this.CantidadEntregados = 0;
     }
 
-    public List<Pedido> PedidosEntregados { get => pedidosEntregados;}
-    public double Ganancia { get => ganancia; }
-    public int CantidadEntregados { get => cantidadEntregados;}
-    
+    public List<Pedido> PedidosEntregados { get => pedidosEntregados; set => pedidosEntregados = value; }
+    public double Ganancia { get => ganancia; set => ganancia = value; }
+    public int CantidadEntregados { get => cantidadEntregados; set => cantidadEntregados = value; }
+
     public Pedido AgregarPedido(Pedido pedido)
     {
-        pedidosEntregados.Add(pedido);
-        ganancia = pedidosEntregados.Count * 500;
-        cantidadEntregados = pedidosEntregados.Count;
+        PedidosEntregados.Add(pedido);
+        Ganancia = PedidosEntregados.Count * 500;
+        CantidadEntregados = PedidosEntregados.Count;
         return pedido;
     }
 }

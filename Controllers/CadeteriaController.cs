@@ -108,6 +108,6 @@ public class CadeteriaController : ControllerBase
                 return NotFound("No esta libre el cadete");
             }
         }
-        return NotFound("Pedido no existe");
+        return NotFound("Pedido no existe o cadete no existe");
     }
 }

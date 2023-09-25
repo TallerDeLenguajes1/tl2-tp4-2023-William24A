@@ -14,54 +14,56 @@ public class Cadete
     private EstadoCadete estadoCadete;
     private Informe informe;
 
-    public int Id { get => id; }
-    public string Nombre { get => nombre; }
-    public string Direccion { get => direccion; }
-    public int Telefono { get => telefono; }
-    public EstadoCadete EstadoCadete {get => estadoCadete;}
-    public Informe Informe{ get => informe;}
+    public int Id { get => id; set => id = value; }
+    public string Nombre { get => nombre; set => nombre = value; }
+    public string Direccion { get => direccion; set => direccion = value; }
+    public int Telefono { get => telefono; set => telefono = value; }
+    public EstadoCadete EstadoCadete { get => estadoCadete; set => estadoCadete = value; }
+    public Informe Informe { get => informe; set => informe = value; }
+
     public Cadete()
     {
-        id = 0;
-        telefono = 0;
-        informe = new Informe();
-        estadoCadete = EstadoCadete.Libre;
-        informe = new Informe();
+        Id = 0;
+        Telefono = 0;
+        Informe = new Informe();
+        EstadoCadete = EstadoCadete.Libre;
+        Informe = new Informe();
     }
 
     public Cadete(int id, string nombre, string direccion, int telefono)
     {
-        this.id = id;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        estadoCadete = EstadoCadete.Libre;
-        informe = new Informe();
+        this.Id = id;
+        this.Nombre = nombre;
+        this.Direccion = direccion;
+        this.Telefono = telefono;
+        EstadoCadete = EstadoCadete.Libre;
+        Informe = new Informe();
     }
-     public void CambiarDatos(int id, string nombre, string direccion, int telefono)
+
+    public void CambiarDatos(int id, string nombre, string direccion, int telefono)
     {
-        this.id = id;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.telefono = telefono;
+        this.Id = id;
+        this.Nombre = nombre;
+        this.Direccion = direccion;
+        this.Telefono = telefono;
     }
     public void CambiarEstado()
     {
-        if(estadoCadete == EstadoCadete.EntregandoEncangue)
+        if(EstadoCadete == EstadoCadete.EntregandoEncangue)
         {
-            estadoCadete = EstadoCadete.Libre;
+            EstadoCadete = EstadoCadete.Libre;
         }
         else
         {
-            estadoCadete = EstadoCadete.EntregandoEncangue;
+            EstadoCadete = EstadoCadete.EntregandoEncangue;
         }
     }
     public string InformeCadete()
     {
-        return $"ID: {id}\nNombre cadete: {nombre}\nDireccion: {direccion}\nTelefono: {telefono}\n";
+        return $"ID: {Id}\nNombre cadete: {Nombre}\nDireccion: {Direccion}\nTelefono: {Telefono}\n";
     }
     public Informe RetornarInforme()
     {
-        return informe;
+        return Informe;
     }
 }

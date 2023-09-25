@@ -44,5 +44,28 @@
                 "CantidadEntregados": 0
             }
         }
+    },
+    {
+        "NumeroPedido": 3,
+        "Observacion": "qqwweq",
+        "Cliente": {
+            "NombreCliente": "qweqwe",
+            "Direccion": "qewe",
+            "Telefono": 122321,
+            "Datosreferencia": "wqeqweeqw"
+        },
+        "Estado": 1,
+        "Cadete": {
+            "Id": 0,
+            "Nombre": null,
+            "Direccion": null,
+            "Telefono": 0,
+            "EstadoCadete": 1,
+            "Informe": {
+                "PedidosEntregados": [],
+                "Ganancia": 0,
+                "CantidadEntregados": 0
+            }
+        }
     }
 ]

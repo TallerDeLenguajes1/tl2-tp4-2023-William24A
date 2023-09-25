@@ -16,23 +16,24 @@ public class Pedido
     private Estado estado;
     private Cadete cadete;
 
-    public int NumeroPedido { get => numeroPedido; }
-    public string? Observacion { get => observacion; }
-    public Cliente Cliente { get => cliente; }
-    public Estado Estado { get => estado; }
-    public Cadete Cadete { get => cadete;}
+    public int NumeroPedido { get => numeroPedido; set => numeroPedido = value; }
+    public string? Observacion { get => observacion; set => observacion = value; }
+    public Cliente Cliente { get => cliente; set => cliente = value; }
+    public Estado Estado { get => estado; set => estado = value; }
+    public Cadete Cadete { get => cadete; set => cadete = value; }
+
     public Pedido()
     {
-        cliente = new Cliente();
-        cadete = new Cadete();
+        Cliente = new Cliente();
+        Cadete = new Cadete();
     }
     public Pedido(int numeroPedido, string? observacion)
     {
-        this.numeroPedido = numeroPedido;
-        this.observacion = observacion;
-        this.cliente = new Cliente();
-        this.estado = Estado.Encargado;
-        this.cadete = new Cadete();
+        this.NumeroPedido = numeroPedido;
+        this.Observacion = observacion;
+        this.Cliente = new Cliente();
+        this.Estado = Estado.Encargado;
+        this.Cadete = new Cadete();
     }
     public Estado VerEstado()
     {
@@ -40,14 +41,14 @@ public class Pedido
     }
     public bool CambiarEstado()
     {
-        switch(estado)
+        switch(Estado)
         {
             case Estado.Encargado:
-                estado = Estado.Encamino;
+                Estado = Estado.Encamino;
                 break;
             case Estado.Encamino:
-                estado = Estado.Entregado;
-                cadete.CambiarEstado();
+                Estado = Estado.Entregado;
+                Cadete.CambiarEstado();
                 //cadete.Informe.AgregarPedido();
                 break;
             default:
@@ -57,25 +58,25 @@ public class Pedido
     }
     public bool CancelarPedido()
     {
-        estado = Estado.Cancelado;
+        Estado = Estado.Cancelado;
         return true;
     }
     public void EstadoEntregado() //Se utiliza en manejo de archivos para Leer datos
     {
-        estado = Estado.Entregado; 
+        Estado = Estado.Entregado; 
     }
     public void CambiarDatosCadete(int id, string nombre, string direccion, int telefono)
     {
-        this.cadete.CambiarDatos(id,nombre,direccion,telefono);
+        this.Cadete.CambiarDatos(id,nombre,direccion,telefono);
     }
     public void CambiarDatosCliente(string nombreCliente, string direccion, int telefono, string datosreferencia)
     {
-        this.cliente.CambiarDatos(nombreCliente, direccion,telefono,datosreferencia);
+        this.Cliente.CambiarDatos(nombreCliente, direccion,telefono,datosreferencia);
     }
 
     public string InformePedido()
     {
-        return $"Numero de pedido: {numeroPedido}\nObservacion: {observacion}\n"+cliente.Informe()+cadete.InformeCadete();
+        return $"Numero de pedido: {NumeroPedido}\nObservacion: {Observacion}\n"+Cliente.Informe()+Cadete.InformeCadete();
     }
 
 }
