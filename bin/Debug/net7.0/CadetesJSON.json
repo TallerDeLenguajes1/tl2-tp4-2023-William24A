@@ -12,10 +12,10 @@
     }
   },
   {
-    "id": 0,
-    "nombre": null,
-    "direccion": null,
-    "telefono": 0,
+    "id": 2,
+    "nombre": "cadete2",
+    "direccion": "AV. las flores",
+    "telefono": 1234356,
     "estadoCadete": 1,
     "informe": {
       "pedidosEntregados": [],
