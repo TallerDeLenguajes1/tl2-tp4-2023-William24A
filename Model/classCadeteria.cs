@@ -18,12 +18,17 @@ public class Cadeteria
     private int telefono;
     private List<Cadete> listaempleados;
     private List<Pedido> listapedidos;
+    private AccesoADatosCadeteria archivoCadeteria;
+    private AccesoADatosCadete archivoCadete;
     private AccesoADatosPedido archivoPedido;
 
     public Cadeteria()
     {
+        nombre ="";
         listaempleados = new List<Cadete>();
         listapedidos = new List<Pedido>();
+        archivoCadeteria = new AccesoCadeteriaJSON();
+        archivoCadete = new AccesoCadeteJSON();
         archivoPedido = new AccesoPedidoJSON();
     }
     public Cadeteria(string nombre, int telefono)
@@ -32,32 +37,22 @@ public class Cadeteria
         this.telefono= telefono;
         listaempleados = new List<Cadete>();
         listapedidos = new List<Pedido>();
+        archivoCadeteria = new AccesoCadeteriaJSON();
+        archivoCadete = new AccesoCadeteJSON();
         archivoPedido = new AccesoPedidoJSON();
     }
 
     public string Nombre { get => nombre; set => nombre = value;}
     public int Telefono { get => telefono; set => telefono = value;}
-    internal List<Cadete> Listaempleados { get => listaempleados; set => listaempleados = value;}
-    internal List<Pedido> Listapedios {get => listapedidos; set => listapedidos = value;}
-    public AccesoADatosPedido ArchivoPedido {get => archivoPedido; set => archivoPedido = value;}
+    public AccesoADatosCadeteria ArchivoCadeteria { get => archivoCadeteria;}
+    public AccesoADatosCadete ArchivoCadete { get => archivoCadete;}
+    public AccesoADatosPedido ArchivoPedido { get => archivoPedido;}
     private bool CargarDatos(string nombreclase)
     {
-        if(nombreclase == "csv")
+        if(nombreclase == "json")
         {
-            var archivo = new AccesoCadeteriaCSV();
-            var archivoCSV = new AccesoCadeteCSV();
-            var archivoPedido = new AccesoPedidoCSV();
-            archivo.LeerDatosCadeteria("CadeteriaCSV.csv");
-            cadeteriaSingleton.AsignarListaEmpleados(archivoCSV.LeerDatosCadetes("CadetesCSV.csv"));
-            cadeteriaSingleton.AsignarListaPedido(archivoPedido.LeerDatosPedido("PedidoCSV.csv"));
-            return true;
-        }else if(nombreclase == "json")
-        {
-            var archivo = new AccesoCadeteriaJSON();
-            var archivoJSON = new AccesoCadeteJSON();
-            var archivoPedido = new AccesoPedidoJSON();
-            archivo.LeerDatosCadeteria("CadeteriaJSON.json");
-            cadeteriaSingleton.AsignarListaEmpleados(archivoJSON.LeerDatosCadetes("CadetesJSON.json"));
+            archivoCadeteria.LeerDatosCadeteria("CadeteriaJSON.json");
+            cadeteriaSingleton.AsignarListaEmpleados(archivoCadete.LeerDatosCadetes("CadetesJSON.json"));
             cadeteriaSingleton.AsignarListaPedido(archivoPedido.LeerDatosPedido("PedidoJSON.json"));
             return true;
         }
@@ -66,17 +61,17 @@ public class Cadeteria
     public bool CrearCadeteAgregar(int id, string nombre, string direccion, int telefono)
     {
         Cadete cadete = new Cadete(id,nombre,direccion,telefono);
-        Listaempleados.Add(cadete);
+        listaempleados.Add(cadete);
         return true;
     }
     public void EliminarCadete(int id)
     {
-        Listaempleados.RemoveAll(e => e.Id == id );
+        listaempleados.RemoveAll(e => e.Id == id );
     }
     public bool CrearPedidoAgregar(int numeroPedido, string? observacion)
     {
         Pedido pedido = new Pedido(numeroPedido, observacion);
-        Listapedios.Add(pedido);
+        listapedidos.Add(pedido);
         return true;
     }
 
@@ -90,7 +85,7 @@ public class Cadeteria
     }
     public bool CambiarEstado(int codigoPedido)
     {
-        foreach (var pedido in Listapedios)
+        foreach (var pedido in listapedidos)
         {
             if(pedido.NumeroPedido == codigoPedido)
             {
@@ -126,11 +121,11 @@ public class Cadeteria
     }
     public Pedido AsignarCadeteAPedido(int idcadete, int idpedido)
     {
-        foreach (var pedido in Listapedios)
+        foreach (var pedido in listapedidos)
         {
             if(pedido.NumeroPedido == idpedido)
             {
-                foreach (var cadete in Listaempleados)
+                foreach (var cadete in listaempleados)
                 {
                     if(cadete.Id == idcadete)
                     {
@@ -145,7 +140,7 @@ public class Cadeteria
     }
     public bool AsignarClienteAPedido(int idpedido,string nombreCliente, string direccion, int telefono, string datosreferencia)
     {
-        foreach (var pedido in Listapedios)
+        foreach (var pedido in listapedidos)
         {
             if(pedido.NumeroPedido == idpedido)
             {
@@ -157,7 +152,7 @@ public class Cadeteria
     }
     public int EncontrarCadeteLibere(int idcadete)
     {
-        foreach (var cadete in Listaempleados)
+        foreach (var cadete in listaempleados)
         {
             if(cadete.Id == idcadete)
             {

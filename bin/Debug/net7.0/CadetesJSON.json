@@ -1,21 +1,9 @@
 [
   {
     "id": 1,
-    "nombre": "william",
-    "direccion": "AV. las flores",
-    "telefono": 12323,
-    "estadoCadete": 1,
-    "informe": {
-      "pedidosEntregados": [],
-      "ganancia": 0,
-      "cantidadEntregados": 0
-    }
-  },
-  {
-    "id": 2,
-    "nombre": "cadete2",
-    "direccion": "AV. las flores",
-    "telefono": 1234356,
+    "nombre": "dasdsa",
+    "direccion": "sdsasd",
+    "telefono": 3234,
     "estadoCadete": 1,
     "informe": {
       "pedidosEntregados": [],

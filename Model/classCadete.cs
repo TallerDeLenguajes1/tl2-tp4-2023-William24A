@@ -23,29 +23,31 @@ public class Cadete
 
     public Cadete()
     {
-        Id = 0;
-        Telefono = 0;
-        Informe = new Informe();
-        EstadoCadete = EstadoCadete.Libre;
-        Informe = new Informe();
+        id = 0;
+        nombre = "";
+        direccion = "";
+        telefono = 0;
+        estadoCadete = EstadoCadete.Libre;
+        informe = new Informe();
+        
     }
 
     public Cadete(int id, string nombre, string direccion, int telefono)
     {
-        this.Id = id;
-        this.Nombre = nombre;
-        this.Direccion = direccion;
-        this.Telefono = telefono;
+        Id = id;
+        Nombre = nombre;
+        Direccion = direccion;
+        Telefono = telefono;
         EstadoCadete = EstadoCadete.Libre;
         Informe = new Informe();
     }
 
     public void CambiarDatos(int id, string nombre, string direccion, int telefono)
     {
-        this.Id = id;
-        this.Nombre = nombre;
-        this.Direccion = direccion;
-        this.Telefono = telefono;
+        Id = id;
+        Nombre = nombre;
+        Direccion = direccion;
+        Telefono = telefono;
     }
     public void CambiarEstado()
     {

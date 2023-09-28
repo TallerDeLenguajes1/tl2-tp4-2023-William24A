@@ -44,7 +44,7 @@ public class AccesoCadeteCSV: AccesoADatosCadete
         {
             using (StreamWriter writer = new StreamWriter(ruta))
             {
-                foreach (var item in cadeteria.Listaempleados)
+                foreach (var item in cadeteria.GetCadetes())
                 {
                     writer.WriteLine($"{item.Id},{item.Nombre},{item.Direccion},{item.Telefono}");
                 }
@@ -67,7 +67,7 @@ public class AccesoCadeteJSON: AccesoADatosCadete
     }
     public override void CargarDatosCadetes(Cadeteria cadeteria, string ruta)
     {
-        string Json = JsonSerializer.Serialize<List<Cadete>>(cadeteria.Listaempleados);
+        string Json = JsonSerializer.Serialize<List<Cadete>>(cadeteria.GetCadetes());
         string pathJSON = Directory.GetCurrentDirectory()+"\\"+ruta;
             using(StreamWriter sw = new StreamWriter(pathJSON, false)){
                 sw.Write(Json);
