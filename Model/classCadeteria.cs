@@ -31,6 +31,7 @@ public class Cadeteria
         nombre ="";
         listaempleados = new List<Cadete>();
         listapedidos = new List<Pedido>();
+       
     }
     public Cadeteria(string nombre, int telefono)
     {
@@ -66,9 +67,19 @@ public class Cadeteria
     {
         return listapedidos;
     }
+
+    public Pedido GetPedidoID(int idpedido)
+    {
+        return listapedidos.SingleOrDefault( pedido => pedido.NumeroPedido == idpedido);
+    }
     public List<Cadete> GetCadetes()
     {
         return listaempleados;
+    }
+
+    public Cadete GetCadeteId(int idcadete)
+    {
+        return listaempleados.SingleOrDefault(cadete => cadete.Id == idcadete);
     }
     public bool CambiarEstado(int codigoPedido)
     {

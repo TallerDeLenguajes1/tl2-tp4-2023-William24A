@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Mvc;
 using WebAPI;
 
@@ -21,13 +20,28 @@ public class CadeteriaController : ControllerBase
     [Route("Pedido")]
     public ActionResult<List<Pedido>> GetPedidos()
     {
+        cadeteria.AsignarListaPedido(); //esto para todos los llamados
         if(cadeteria.ExistePedido())
         {
             return Ok(cadeteria.GetPedidos());
         }
         return NotFound(false);
     }
-        
+
+    [HttpGet]
+    [Route("Pedido por id")]
+    public ActionResult<Pedido> GetPedidoId(int idpedido)
+    {
+        if(cadeteria.ExisteNumeroPedido(idpedido))
+        {
+            if(cadeteria.GetPedidoID(idpedido) == null)
+            {
+                return NotFound(false);
+            }
+            return Ok(cadeteria.GetPedidoID(idpedido));
+        }
+        return NotFound(false);
+    }    
 
     [HttpGet]
     [Route("Cadete")]
@@ -39,6 +53,22 @@ public class CadeteriaController : ControllerBase
         }
         return NotFound(false);
     }
+
+    [HttpGet]
+    [Route("Cadete por id")]
+    public ActionResult<Cadete> GetCadeteId(int idcadete)
+    {
+        if(cadeteria.ExisteIDCadete(idcadete))
+        {
+            if(cadeteria.GetCadeteId(idcadete) == null)
+            {
+                return NotFound(false);
+            }
+            return Ok(cadeteria.GetCadeteId(idcadete));
+        }
+        return NotFound(false);
+    }
+
     [HttpGet]
     [Route("Informe")]
     public ActionResult<Informe> GetInforme()
@@ -48,6 +78,18 @@ public class CadeteriaController : ControllerBase
             return Ok(cadeteria.ReturnInforme());
         }
         return NotFound(false);
+    }
+
+    [HttpPost("Agregar cadete")]
+    public ActionResult<List<Cadete>> AddCadete(int id, string nombre, string direccion, int telefono)
+    {
+        if(!cadeteria.ExisteIDCadete(id))
+        {
+            cadeteria.CrearCadeteAgregar(id,nombre,direccion,telefono);
+            cadeteria.ArchivoCadete.CargarDatosCadetes(cadeteria,"CadetesJSON.json");
+            return Created("",cadeteria.GetCadetes());
+        }
+        return NotFound("Ya existe el id");
     }
     
     [HttpPost("Agregar pedido")]
