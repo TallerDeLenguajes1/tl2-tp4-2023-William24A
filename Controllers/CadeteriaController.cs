@@ -49,13 +49,6 @@ public class CadeteriaController : ControllerBase
         }
         return NotFound(false);
     }
-
-    [HttpPost("Agregar cadete")]
-    public ActionResult<List<Cadete>> AddCadete(int id, string nombre, string direccion, int telefono)
-    {
-        cadeteria.CrearCadeteAgregar(id,nombre,direccion,telefono);
-        return Created("",cadeteria.GetCadetes());
-    }
     
     [HttpPost("Agregar pedido")]
     public ActionResult<List<Pedido>> AddPedido(int numeroPedido, string? observacion,string nombreCliente, string direccion, int telefono, string datosreferencia)

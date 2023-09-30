@@ -1,14 +1,14 @@
 [
   {
-    "id": 1,
-    "nombre": "dasdsa",
-    "direccion": "sdsasd",
-    "telefono": 3234,
-    "estadoCadete": 1,
-    "informe": {
-      "pedidosEntregados": [],
-      "ganancia": 0,
-      "cantidadEntregados": 0
+    "Id": 1,
+    "Nombre": "dasdsa",
+    "Direccion": "sdsasd",
+    "Telefono": 3234,
+    "EstadoCadete": 1,
+    "Informe": {
+      "PedidosEntregados": [],
+      "Ganancia": 0,
+      "CantidadEntregados": 0
     }
   }
 ]

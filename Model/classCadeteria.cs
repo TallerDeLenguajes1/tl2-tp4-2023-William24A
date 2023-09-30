@@ -9,8 +9,12 @@ public class Cadeteria
     {
         if(cadeteriaSingleton == null)
         {
-            cadeteriaSingleton = new Cadeteria();
-            cadeteriaSingleton.CargarDatos("json");
+            var accesoacadeteria =new AccesoCadeteriaJSON(); 
+            cadeteriaSingleton = accesoacadeteria.LeerDatosCadeteria("CadeteriaJSON.json");
+            cadeteriaSingleton.archivoCadete = new AccesoCadeteJSON();
+            cadeteriaSingleton.archivoPedido = new AccesoPedidoJSON();
+            cadeteriaSingleton.AsignarListaEmpleados();
+            cadeteriaSingleton.AsignarListaPedido();
         }
         return cadeteriaSingleton;
     }
@@ -27,9 +31,6 @@ public class Cadeteria
         nombre ="";
         listaempleados = new List<Cadete>();
         listapedidos = new List<Pedido>();
-        archivoCadeteria = new AccesoCadeteriaJSON();
-        archivoCadete = new AccesoCadeteJSON();
-        archivoPedido = new AccesoPedidoJSON();
     }
     public Cadeteria(string nombre, int telefono)
     {
@@ -37,9 +38,6 @@ public class Cadeteria
         this.telefono= telefono;
         listaempleados = new List<Cadete>();
         listapedidos = new List<Pedido>();
-        archivoCadeteria = new AccesoCadeteriaJSON();
-        archivoCadete = new AccesoCadeteJSON();
-        archivoPedido = new AccesoPedidoJSON();
     }
 
     public string Nombre { get => nombre; set => nombre = value;}
@@ -47,17 +45,6 @@ public class Cadeteria
     public AccesoADatosCadeteria ArchivoCadeteria { get => archivoCadeteria;}
     public AccesoADatosCadete ArchivoCadete { get => archivoCadete;}
     public AccesoADatosPedido ArchivoPedido { get => archivoPedido;}
-    private bool CargarDatos(string nombreclase)
-    {
-        if(nombreclase == "json")
-        {
-            archivoCadeteria.LeerDatosCadeteria("CadeteriaJSON.json");
-            cadeteriaSingleton.AsignarListaEmpleados(archivoCadete.LeerDatosCadetes("CadetesJSON.json"));
-            cadeteriaSingleton.AsignarListaPedido(archivoPedido.LeerDatosPedido("PedidoJSON.json"));
-            return true;
-        }
-        return false;
-    }
     public bool CrearCadeteAgregar(int id, string nombre, string direccion, int telefono)
     {
         Cadete cadete = new Cadete(id,nombre,direccion,telefono);
@@ -265,12 +252,12 @@ public class Cadeteria
             }
         return listaInforme;
     }
-    public void AsignarListaEmpleados(List<Cadete> listacadetesNueva)
+    public void AsignarListaEmpleados()
     {
-        listaempleados = listacadetesNueva;
+        listaempleados = archivoCadete.LeerDatosCadetes("CadetesJSON.json");
     }
-    public void AsignarListaPedido(List<Pedido> listaPedido)
+    public void AsignarListaPedido()
     {
-        listapedidos = listaPedido;
+        listapedidos = archivoPedido.LeerDatosPedido("PedidoJSON.json");
     }
 }
